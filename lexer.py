@@ -35,6 +35,7 @@ class Lexer():
       self.tokens.append(Token(TYPE_NUMBER, float(num)))
     else:
       self.tokens.append(Token(TYPE_NUMBER, int(num)))
+
   def generate_tokens(self):
     self.tokens = []
     while self.current_char != None:
@@ -42,4 +43,16 @@ class Lexer():
         self.advance()
       elif self.current_char.isnumeric():
         self.make_number()
+      elif self.current_char == '+':
+        self.advance()
+        self.tokens.append(Token(TYPE_PLUS, "+"))
+      elif self.current_char == '-':
+        self.advance()
+        self.tokens.append(Token(TYPE_MINUS, "-"))
+      elif self.current_char == '*':
+        self.advance()
+        self.tokens.append(Token(TYPE_MULTIPLY, "*"))
+      elif self.current_char == '/':
+        self.advance()
+        self.tokens.append(Token(TYPE_DIVIDE, "/"))
     return self.tokens

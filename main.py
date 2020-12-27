@@ -6,8 +6,6 @@ os.system("cls")
 
 while True:
   text = input("lang > ")
-  if text == 'quit' or 'q':
-    sys.exit()
   lexer = Lexer(text)
-  result = list(lexer.generate_tokens())
+  result = lexer.generate_tokens()
   print(result)
