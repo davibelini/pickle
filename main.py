@@ -4,6 +4,7 @@
 
 from lexer import Lexer
 from parse import Parser
+from interpreter import Interpreter
 from sys import argv
 from os import system
 
@@ -18,4 +19,8 @@ while True:
   tokens = lexer.generate_tokens()
   parser = Parser(tokens)
   tree = parser.generate_tree()
-  print(tree)
+  interpreter = Interpreter()
+  if not tree:
+    print("ERROR: parser tree does not exist")
+  else:
+    print(interpreter.visit(tree))
