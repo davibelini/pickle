@@ -4,13 +4,16 @@
 
 from lexer import Lexer
 from parse import Parser
-import sys
-import os
+from sys import argv
+from os import system
 
-os.system("cls")
+system("cls")
+system("@echo The Rush Programming Language.")
+version = "0.0.1"
+system(f"@echo @{version}")
 
 while True:
-  text = input("lang > ")
+  text = input(f"rush > ")
   lexer = Lexer(text)
   tokens = lexer.generate_tokens()
   parser = Parser(tokens)

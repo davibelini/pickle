@@ -49,7 +49,7 @@ class Lexer():
         self.tokens.append(Token(TYPE_MULTIPLY))
       elif self.current_char == '/':
         self.advance()
-        self.tokens.append(Token(TYPE_DIVIDE ))
+        self.tokens.append(Token(TYPE_DIVIDE))
       elif self.current_char == '(':
         self.advance()
         self.tokens.append(Token(TYPE_LPAR))
@@ -58,6 +58,6 @@ class Lexer():
         self.tokens.append(Token(TYPE_RPAR))
       else:
         print("ERROR: tried to work on not allowed character")
-        self.tokens = "ERROR: lexer error"
-        break
+        self.tokens = None
+        return;
     return self.tokens
