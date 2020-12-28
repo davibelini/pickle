@@ -1,10 +1,5 @@
 from tokens import Token
-
-TYPE_NUMBER = "NUMBER"
-TYPE_PLUS = "PLUS"
-TYPE_MINUS = "MINUS"
-TYPE_MULTIPLY = "MULTIPLY"
-TYPE_DIVIDE = "DIVIDE"
+from types_ import *
 
 class Lexer():  
   def __init__(self, text):
@@ -45,14 +40,24 @@ class Lexer():
         self.make_number()
       elif self.current_char == '+':
         self.advance()
-        self.tokens.append(Token(TYPE_PLUS, "+"))
+        self.tokens.append(Token(TYPE_PLUS))
       elif self.current_char == '-':
         self.advance()
-        self.tokens.append(Token(TYPE_MINUS, "-"))
+        self.tokens.append(Token(TYPE_MINUS))
       elif self.current_char == '*':
         self.advance()
-        self.tokens.append(Token(TYPE_MULTIPLY, "*"))
+        self.tokens.append(Token(TYPE_MULTIPLY))
       elif self.current_char == '/':
         self.advance()
-        self.tokens.append(Token(TYPE_DIVIDE, "/"))
+        self.tokens.append(Token(TYPE_DIVIDE ))
+      elif self.current_char == '(':
+        self.advance()
+        self.tokens.append(Token(TYPE_LPAR))
+      elif self.current_char == ')':
+        self.advance()
+        self.tokens.append(Token(TYPE_RPAR))
+      else:
+        print("ERROR: tried to work on not allowed character")
+        self.tokens = "ERROR: lexer error"
+        break
     return self.tokens
