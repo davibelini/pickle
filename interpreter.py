@@ -27,3 +27,9 @@ class Interpreter:
       return Number(self.visit(node.node_1).value / self.visit(node.node_2).value)
     except:
       raise Exception("ERROR: math error: cannot divide by 0")
+
+  def visit_MinusNode(self, node):
+    return Number(-(self.visit(node.node).value) )
+
+  def visit_PlusNode(self, node):
+    return Number(-(self.visit(node.node).value))
