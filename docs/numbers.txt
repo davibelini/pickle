@@ -1,0 +1,6 @@
+To define a number literal, use just a number:
+    5
+You can do expressions too:
+    5 + 3 * 22
+Using parenthesis:
+    (5 + 5) / 3

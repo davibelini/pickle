@@ -1,0 +1,20 @@
+Pieces are pieces of code. You can use them as classes, structs, functions and labels.
+
+A good example of a class/struct implementation of pieces is at ANIMAL.rsh
+
+    multiply.rsh
+        program MULTIPLY:
+          
+          <num> number1 as <num>in: "type a number > "
+          <num> number2 as <num>in: "type another number > "
+          MULTIPLY_FUNC: number1, number2
+
+        end program MULTIPLY.
+          
+
+
+        piece MULTIPLY_FUNC receives <num> n, <num> n2:
+
+          exit: n * n2.
+
+        end piece MULTIPLY_FUNC.
