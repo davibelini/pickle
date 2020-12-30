@@ -1,8 +1,9 @@
 # EBNF grammar
 
-factor  : (INT | FLOAT)
+factor  : (INT | FLOAT | IDENTIFIER)
         : LPAR expr RPAR
 
 term    : factor ((MUL | DIV) factor)*
 
 expr    : term ((PLUS | MINUS) term)*
+        : KEYWORD:as IDENTIFIER expr

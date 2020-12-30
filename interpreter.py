@@ -1,6 +1,22 @@
 from nodes import *
 from values import Number
 
+class SymbolTable:
+  def __init__(self):
+    self.symbols = {}
+    self.parent = None
+
+  def get(self, name):
+    value = self.symbols.get(name, None)
+    if value == None and self.parent:
+      return self.parent.get(name)
+    return value
+
+  def set(self, name, value):
+    self.symbols[name] = value
+
+  def remove(self, name):
+    del self.symbols[name]
 class Interpreter:
   def __init__(self):
     pass
@@ -33,3 +49,18 @@ class Interpreter:
 
   def visit_PlusNode(self, node):
     return Number(-(self.visit(node.node).value))
+
+  def visit_VarAccessNode(self, node):
+    var_name = node.var_name_token.value
+    value = global_symbol_table.get(var_name)
+
+    if not value:
+      print(f"'{value}' is not defined")
+
+    return value
+
+  def visit_VarAssignNode(self, node):
+    var_name = node.var_name_token.value
+    value = self.visit(node.value_node)
+    global_symbol_table.set(var_name, value)
+    return value
