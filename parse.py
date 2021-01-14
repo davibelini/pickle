@@ -26,25 +26,6 @@ class Parser:
 
   def expr(self):
     result = self.term() # Left part of expression
-
-    if self.current_token.type == TYPE_KEYWORD and self.current_token.value == "as" and self.current_token != None:
-      self.advance()
-
-      if self.current_token.type != TYPE_IDENTIFIER:
-        print("ERROR: expected identifier")
-
-      var_name = self.current_token
-      self.advance()
-
-      if self.current_token.type != TYPE_EQ:
-        print("ERROR: expected 'as' keyword")
-
-      self.advance()
-
-      expr = self.expr()
-
-      return VarAssignNode(var_name, expr)
-
     while self.current_token != None and self.current_token.type in (TYPE_PLUS, TYPE_MINUS):
       if self.current_token.type == TYPE_PLUS:
         self.advance()
@@ -87,6 +68,3 @@ class Parser:
     elif token.type == TYPE_NUMBER:
       self.advance()
       return NumberNode(self.factor())
-    elif token.type == TYPE_IDENTIFIER:
-      self.advance()
-      return VarAccessNode(token)

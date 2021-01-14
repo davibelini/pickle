@@ -1,11 +1,5 @@
 from tokens import Token
 from types_ import *
-import string
-
-letters = string.ascii_letters
-keywords = [
-  "as"
-]
 
 class Lexer():  
   def __init__(self, text):
@@ -37,17 +31,6 @@ class Lexer():
     else:
       self.tokens.append(Token(TYPE_NUMBER, int(num)))
 
-  def make_identifier(self):
-    id_str = ''
-
-    while self.current_char != None and self.current_char in (letters + '0123456789' + '_'):
-      id_str += self.current_char
-      self.advance()
-    
-    token_type = TYPE_KEYWORD if id_str in keywords else TYPE_IDENTIFIER
-    return Token(token_type, id_str)
-
-
   def generate_tokens(self):
     self.tokens = []
     while self.current_char != None:
@@ -55,8 +38,6 @@ class Lexer():
         self.advance()
       elif self.current_char.isnumeric():
         self.make_number()
-      elif self.current_char in letters:
-        self.tokens.append(self.make_identifier())
       elif self.current_char == '+':
         self.advance()
         self.tokens.append(Token(TYPE_PLUS))
@@ -77,5 +58,6 @@ class Lexer():
         self.tokens.append(Token(TYPE_RPAR))
       else:
         print("ERROR: tried to work on not allowed character")
+        self.tokens = None
         return;
     return self.tokens

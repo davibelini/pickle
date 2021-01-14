@@ -1,2 +1,2 @@
-# Pickle. 
-## a sour programming language.
+# Rush. 
+## a programming language.
