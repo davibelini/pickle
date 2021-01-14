@@ -1,0 +1,4 @@
+(inf
+  (var prj "bark")
+  (var vrs "0.1")
+  (var gth "https://github.com/davibelini/pickle/tree/master/examples/bark/"))

@@ -1,5 +1,3 @@
-(inf NOTMAIN) // not main(inf.ckl) file
-
 (sec dta( // data section where you define data structures
   (fnc log // declare log function
     [1, ...] // log receives mandatorily 1 argument
