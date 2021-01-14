@@ -1,0 +1,12 @@
+(inf INDMOD) // independent module(can be executed alone without an inf.ckl file)
+
+(sec dta
+  (fnc multiply
+    [2]
+      (rtn (rgs.1 * rgs.2)))
+  (var fct1 4)
+  (var fct2 5)
+  (var rst (multiply fct1 fct2)))
+
+(sec cde
+  (prt rst))

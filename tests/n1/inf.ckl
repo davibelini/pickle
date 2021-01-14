@@ -1,0 +1,4 @@
+(inf
+  (var prj "n1")
+  (var vrs "0.1")
+  (var gth "https://github.com/davibelini/pickle/tree/master/tests/n1/"))

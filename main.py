@@ -9,12 +9,12 @@ from sys import argv
 from os import system
 
 system("cls")
-system("@echo The Rush Programming Language.")
+system("@echo The Pickle Programming Language.")
 version = "0.0.1"
 system(f"@echo @{version}")
 
 while True:
-  text = input(f"rush > ")
+  text = input(f"pickle > ")
   lexer = Lexer(text)
   tokens = lexer.generate_tokens()
   parser = Parser(tokens)

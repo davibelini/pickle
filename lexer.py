@@ -57,7 +57,6 @@ class Lexer():
         self.advance()
         self.tokens.append(Token(TYPE_RPAR))
       else:
-        print("ERROR: tried to work on not allowed character")
-        self.tokens = None
-        return;
+        print(f"ERROR: not allowed character '{self.current_char}'")
+        break
     return self.tokens
