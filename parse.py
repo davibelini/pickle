@@ -1,6 +1,6 @@
 from nodes import *
 from types_ import *
-from os import get_terminal_size
+from printf import printf
 
 class Parser:
   def __init__(self, tokens):
@@ -20,7 +20,7 @@ class Parser:
     result = self.expr()
 
     if self.current_token != None:
-      print("ERROR: parsing error")
+      printf("ERROR: parsing error")
 
     return result
 
@@ -52,7 +52,7 @@ class Parser:
       self.advance()
       result = self.expr()
       if self.current_token.type != TYPE_RPAR:
-        print("ERROR: missing close parenthesis")
+        printf("ERROR: missing close parenthesis")
         return;
       self.advance()
       return result

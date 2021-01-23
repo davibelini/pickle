@@ -7,11 +7,14 @@ from parse import Parser
 from interpreter import Interpreter
 from sys import argv
 from os import system
+from printf import printf
 
 system("cls")
 system("@echo The Pickle Programming Language.")
 version = "0.0.1"
 system(f"@echo @{version}")
+
+line_number = 0
 
 while True:
   text = input(f"pickle > ")
@@ -21,6 +24,9 @@ while True:
   tree = parser.generate_tree()
   interpreter = Interpreter()
   if not tree:
-    print("ERROR: parser tree does not exist")
+    print(f"\u007b{line_number}\u007d")
+    line_number += 1
+    continue
   else:
-    print(interpreter.visit(tree))
+    print(f"\u007b{line_number}\u007d => {interpreter.visit(tree)}")
+    line_number += 1

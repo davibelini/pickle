@@ -1,0 +1,11 @@
+The Pickle Programming Language(2021)
+
+Data types.
+
+- number(1)
+- character("a")
+- string("hello")
+- null("null")
+- map(#"item1" -> 3, "item2" -> nil#)
+- array(["item 1", "c", #"hello" -> "world"#])
+- function(f sum x, y {return x + y})

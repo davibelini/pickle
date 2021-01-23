@@ -1,1 +1,0 @@
-pickle run ./bark.ckl

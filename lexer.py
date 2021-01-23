@@ -1,5 +1,6 @@
 from tokens import Token
 from types_ import *
+from printf import printf
 
 class Lexer():  
   def __init__(self, text):
@@ -21,7 +22,7 @@ class Lexer():
       if self.current_char == '.':
         decimal_count += 1
         if decimal_count > 1:
-          print("ERROR: too many decimal points in one number")
+          printf("ERROR: too many decimal points in one number")
         num += '.'
       elif self.current_char.isnumeric():
         num += self.current_char
@@ -57,6 +58,7 @@ class Lexer():
         self.advance()
         self.tokens.append(Token(TYPE_RPAR))
       else:
-        print(f"ERROR: not allowed character '{self.current_char}'")
-        break
+        printf("ERROR: tried to work on not allowed character")
+        self.tokens = None
+        return;
     return self.tokens
