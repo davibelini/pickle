@@ -1,6 +1,13 @@
 from tokens import Token
 from types_ import *
 from printf import printf
+import string
+
+letters = string.ascii_letters
+digits = "0123456789"
+keywords = [
+
+]
 
 class Lexer():  
   def __init__(self, text):
@@ -32,6 +39,25 @@ class Lexer():
     else:
       self.tokens.append(Token(TYPE_NUMBER, int(num)))
 
+  def make_equ(self):
+    self.advance()
+    if self.current_char == '=' and self.current_char != None:
+      self.advance()
+      return self.tokens.append(Token(TYPE_EQUAL))
+    else:
+      self.advance()
+      return self.tokens.append(Token(TYPE_COLON))
+  def make_identifier(self):
+    id_string = self.current_char
+    self.advance()
+    while self.current_char != None and self.current_char in letters + digits + '_':
+      id_string += self.current_char
+      self.advance()
+
+    token_type = TYPE_KEYWORD if id_string in keywords else TYPE_IDENTIFIER
+
+    return self.tokens.append(Token(token_type, id_string))
+
   def generate_tokens(self):
     self.tokens = []
     while self.current_char != None:
@@ -57,8 +83,11 @@ class Lexer():
       elif self.current_char == ')':
         self.advance()
         self.tokens.append(Token(TYPE_RPAR))
+      elif self.current_char == ':':
+        self.make_equ()
+      elif self.current_char in letters or self.current_char == '_':
+        self.make_identifier()
       else:
-        printf("ERROR: tried to work on not allowed character")
-        self.tokens = None
-        return;
+        print(f"ERROR: character not allowed: {self.current_char}")
+        return "ERROR"
     return self.tokens

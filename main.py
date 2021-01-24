@@ -23,10 +23,11 @@ while True:
   parser = Parser(tokens)
   tree = parser.generate_tree()
   interpreter = Interpreter()
-  if not tree:
-    print(f"\u007b{line_number}\u007d")
-    line_number += 1
-    continue
-  else:
-    print(f"\u007b{line_number}\u007d => {interpreter.visit(tree)}")
-    line_number += 1
+  print(tokens)
+  #if not tree:
+  #  print(f"\u007b{line_number}\u007d")
+  #  line_number += 1
+  #  continue
+  #else:
+  #  print(f"\u007b{line_number}\u007d => {interpreter.visit(tree)}")
+  #  line_number += 1
