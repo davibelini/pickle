@@ -1,6 +1,8 @@
+#!C:\Python38\python.exe
+
 # Davi Belini
 # 27-Dec-2020
-# The Rush Programming Language.
+# The Pickle Programming Language.
 
 from lexer import Lexer
 from parse import Parser
@@ -8,6 +10,9 @@ from interpreter import Interpreter
 from sys import argv
 from os import system
 from printf import printf
+from SymbolTable import SymbolTable
+
+global_symbol_table = SymbolTable()
 
 system("cls")
 system("@echo The Pickle Programming Language.")
@@ -22,12 +27,11 @@ while True:
   tokens = lexer.generate_tokens()
   parser = Parser(tokens)
   tree = parser.generate_tree()
-  interpreter = Interpreter()
-  print(tokens)
-  #if not tree:
-  #  print(f"\u007b{line_number}\u007d")
-  #  line_number += 1
-  #  continue
-  #else:
-  #  print(f"\u007b{line_number}\u007d => {interpreter.visit(tree)}")
-  #  line_number += 1
+  interpreter = Interpreter(global_symbol_table)
+  if not tree:
+    print(f"\u007b{line_number}\u007d")
+    line_number += 1
+    continue
+  else:
+    print(f"\u007b{line_number}\u007d => {interpreter.visit(tree)}")
+    line_number += 1

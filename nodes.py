@@ -50,3 +50,12 @@ class DivideNode:
 
   def __repr__(self):
     return f"({self.node_1} / {self.node_2})"
+
+class VarAssignNode:
+  def __init__(self, var_name, var_value):
+    self.var_name = var_name
+    self.var_value = var_value
+
+class VarAccessNode:
+  def __init__(self, var_name):
+    self.var_name = var_name

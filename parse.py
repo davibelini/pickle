@@ -28,10 +28,11 @@ class Parser:
     if self.current_token.type == TYPE_IDENTIFIER:
       var_name = self.current_token.value
       self.advance()
-      if self.current_token.type != TYPE_EQUALS:
-        return print("ERROR: expression doesn't make sense")
+      if self.current_token.type != TYPE_EQUAL:
+        return print("ERROR: missing ':='")
       self.advance()
-      var_value = self.current_token
+      var_value = self.expr()
+      return VarAssignNode(var_name, var_value)
     else:
       result = self.term() # Left part of expression
       while self.current_token != None and self.current_token.type in (TYPE_PLUS, TYPE_MINUS):
@@ -76,3 +77,6 @@ class Parser:
     elif token.type == TYPE_NUMBER:
       self.advance()
       return NumberNode(self.factor())
+    elif token.type == TYPE_IDENTIFIER:
+      self.advance()
+      return VarAccessNode(token.value)

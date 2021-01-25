@@ -2,8 +2,8 @@ from nodes import *
 from values import Number
 
 class Interpreter:
-  def __init__(self):
-    pass
+  def __init__(self, symbol_table):
+    self.symbol_table = symbol_table
 
   def visit(self, node):
     method_name = f"visit_{type(node).__name__}" # type(node).__name__ is the name of the 'node' attribute
@@ -29,7 +29,20 @@ class Interpreter:
       raise Exception("ERROR: math error: cannot divide by 0")
 
   def visit_MinusNode(self, node):
-    return Number(-(self.visit(node.node).value) )
+    return Number(-(self.visit(node.node).value))
 
   def visit_PlusNode(self, node):
     return Number(-(self.visit(node.node).value))
+
+  def visit_VarAssignNode(self, node):
+    self.symbol_table.set(node.var_name, node.var_value)
+    return Number(self.visit(self.symbol_table.get(node.var_name))) # return the value of the variable
+
+  def visit_VarAccessNode(self, node):
+    var_name = node.var_name
+    value = self.symbol_table.get(var_name)
+
+    if not value:
+      return print(f"'{var_name}' is not defined")
+
+    return value
