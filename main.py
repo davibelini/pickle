@@ -1,4 +1,4 @@
-#!C:\Python38\python.exe
+#!c:\Python38\python.exe
 
 # Davi Belini
 # 27-Dec-2020
@@ -10,9 +10,7 @@ from interpreter import Interpreter
 from sys import argv
 from os import system
 from printf import printf
-from SymbolTable import SymbolTable
-
-global_symbol_table = SymbolTable()
+from SymbolTable import global_symbol_table
 
 system("cls")
 system("@echo The Pickle Programming Language.")

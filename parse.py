@@ -1,6 +1,7 @@
 from nodes import *
 from types_ import *
 from printf import printf
+from SymbolTable import global_symbol_table
 
 class Parser:
   def __init__(self, tokens):
@@ -20,16 +21,19 @@ class Parser:
     result = self.expr()
 
     if self.current_token != None:
-      print("ERROR: parsing error")
+      print(f"ERROR: parsing error")
 
     return result
 
   def expr(self):
     if self.current_token.type == TYPE_IDENTIFIER:
       var_name = self.current_token.value
+      if global_symbol_table.get(var_name):
+        self.advance()
+        return VarAccessNode(var_name)
       self.advance()
       if self.current_token.type != TYPE_EQUAL:
-        return print("ERROR: missing ':='")
+        if not global_symbol_table.get(self.current_token.value): return print("ERROR: missing ':='")
       self.advance()
       var_value = self.expr()
       return VarAssignNode(var_name, var_value)

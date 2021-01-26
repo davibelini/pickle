@@ -45,4 +45,4 @@ class Interpreter:
     if not value:
       return print(f"'{var_name}' is not defined")
 
-    return value
+    return self.visit(value)
