@@ -30,7 +30,7 @@ class Parser:
       var_name = self.current_token.value
       if global_symbol_table.get(var_name):
         self.advance()
-        return VarAccessNode(var_name)
+        return VarAccessNode(var_name)  #TODO: Make variables in the left hand size of the expression work.
       self.advance()
       if self.current_token.type != TYPE_EQUAL:
         if not global_symbol_table.get(self.current_token.value): return print("ERROR: missing ':='")
