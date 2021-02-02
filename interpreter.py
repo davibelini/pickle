@@ -26,7 +26,8 @@ class Interpreter:
     try:
       return Number(self.visit(node.node_1).value / self.visit(node.node_2).value)
     except:
-      raise Exception("ERROR: math error: cannot divide by 0")
+      print("ERROR: math error: cannot divide by 0")
+      self.__repr__ = lambda: "null"
 
   def visit_MinusNode(self, node):
     return Number(-(self.visit(node.node).value))
@@ -35,14 +36,14 @@ class Interpreter:
     return Number(-(self.visit(node.node).value))
 
   def visit_VarAssignNode(self, node):
-    self.symbol_table.set(node.var_name, node.var_value)
-    return Number(self.visit(self.symbol_table.get(node.var_name))) # return the value of the variable
+    self.symbol_table.set(node.var_name_token.value, self.visit(node.var_value_token.value) if type(node.var_value_token.value) != int else node.var_value_token.value)
+    return Number(self.symbol_table.get(node.var_name_token.value)) # return the value of the variable
 
   def visit_VarAccessNode(self, node):
-    var_name = node.var_name
-    value = self.symbol_table.get(var_name)
+    var_name = node.var_name_token.value
+    value = (self.symbol_table.get(var_name))
 
     if not value:
       return print(f"'{var_name}' is not defined")
 
-    return self.visit(value)
+    return Number(value)

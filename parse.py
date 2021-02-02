@@ -27,16 +27,16 @@ class Parser:
 
   def expr(self):
     if self.current_token.type == TYPE_IDENTIFIER:
-      var_name = self.current_token.value
-      if global_symbol_table.get(var_name):
+      var_name_token = self.current_token
+      if global_symbol_table.get(var_name_token.value):
         self.advance()
-        return VarAccessNode(var_name)  #TODO: Make variables in the left hand size of the expression work.
+        return VarAccessNode(var_name_token)  #TODO: Make variables in the left hand size of the expression work.
       self.advance()
       if self.current_token.type != TYPE_EQUAL:
         if not global_symbol_table.get(self.current_token.value): return print("ERROR: missing ':='")
       self.advance()
-      var_value = self.expr()
-      return VarAssignNode(var_name, var_value)
+      var_value_token = self.expr()
+      return VarAssignNode(var_name_token, var_value_token)
     else:
       result = self.term() # Left part of expression
       while self.current_token != None and self.current_token.type in (TYPE_PLUS, TYPE_MINUS):
@@ -83,4 +83,4 @@ class Parser:
       return NumberNode(self.factor())
     elif token.type == TYPE_IDENTIFIER:
       self.advance()
-      return VarAccessNode(token.value)
+      return VarAccessNode(self.factor())

@@ -2,10 +2,11 @@ The Pickle Programming Language(2021)
 
 Data types.
 
-- number(1)
+- number(5)
 - character("a")
 - string("hello")
-- null("null")
-- map(#"item1" -> 3, "item2" -> nil#)
+- null(0)
+- map(#"item1" -> 3, "item2" -> null#)
 - array(["item 1", "c", #"hello" -> "world"#])
 - function(f sum x, y {return x + y})
+- coroutine(crtn async_sum x, y {stop(x + y)})

@@ -1,0 +1,17 @@
+f sum x, y {
+  return (x + y)
+}
+
+qsum := f x, y {return x + y}
+
+result_array :=
+ sum:
+  1, 1
+  6, 9
+  (1 * 3), 4
+
+printl qsum 1, 1
+
+
+//output:
+//>>> 3

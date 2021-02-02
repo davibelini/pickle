@@ -6,7 +6,7 @@ import string
 letters = string.ascii_letters
 digits = "0123456789"
 keywords = [
-
+  "f"
 ]
 
 class Lexer():  

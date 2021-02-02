@@ -27,7 +27,7 @@ while True:
   tree = parser.generate_tree()
   interpreter = Interpreter(global_symbol_table)
   if not tree:
-    print(f"\u007b{line_number}\u007d")
+    print(f"\u007b{line_number}\u007d => null")
     line_number += 1
     continue
   else:
