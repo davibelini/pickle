@@ -27,7 +27,6 @@ class Interpreter:
       return Number(self.visit(node.node_1).value / self.visit(node.node_2).value)
     except:
       print("ERROR: math error: cannot divide by 0")
-      self.__repr__ = lambda: "null"
 
   def visit_MinusNode(self, node):
     return Number(-(self.visit(node.node).value))
@@ -36,8 +35,12 @@ class Interpreter:
     return Number(-(self.visit(node.node).value))
 
   def visit_VarAssignNode(self, node):
-    self.symbol_table.set(node.var_name_token.value, self.visit(node.var_value_token.value) if type(node.var_value_token.value) != int else node.var_value_token.value)
-    return Number(self.symbol_table.get(node.var_name_token.value)) # return the value of the variable
+    if hasattr(node.var_value_token, 'value'):
+      self.symbol_table.set(node.var_name_token.value, node.var_value_token.value)
+      return Number(node.var_value_token.value)
+    else:
+      self.symbol_table.set(node.var_name_token.value, self.visit(node.var_value_token))
+      return Number(self.visit(node.var_value_token)) # return the value of the variable
 
   def visit_VarAccessNode(self, node):
     var_name = node.var_name_token.value
